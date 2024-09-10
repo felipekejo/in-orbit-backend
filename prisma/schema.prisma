@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Goal {
+  id                      String    @id @default(uuid())
+  title                   String
+  desiredWeeklyFrequency Int       @map("desired_weekly_frequency")
+  createdAt               DateTime  @default(now()) @map("create_at")
+  updatedAt               DateTime? @updatedAt @map("updated_at")
+
+  goalCompletion GoalCompletion?
+
+  @@map("goals")
+}
+
+model GoalCompletion {
+  id        String   @id @default(uuid())
+  goalId    String   @unique @map("goal_id")
+  createdAt DateTime @default(now()) @map("create_at")
+
+  goal Goal @relation(fields: [goalId], references: [id])
+
+  @@map("goal_completions")
+}

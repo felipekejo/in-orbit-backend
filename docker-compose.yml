@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  in-orbit:
+    image: 'postgres'
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: in-orbit
+    ports:
+      - '5432:5432'
