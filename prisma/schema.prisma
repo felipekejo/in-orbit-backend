@@ -14,20 +14,20 @@ datasource db {
 }
 
 model Goal {
-  id                      String    @id @default(uuid())
-  title                   String
+  id                     String    @id @default(uuid())
+  title                  String
   desiredWeeklyFrequency Int       @map("desired_weekly_frequency")
-  createdAt               DateTime  @default(now()) @map("create_at")
-  updatedAt               DateTime? @updatedAt @map("updated_at")
+  createdAt              DateTime  @default(now()) @map("create_at")
+  updatedAt              DateTime? @updatedAt @map("updated_at")
 
-  goalCompletion GoalCompletion?
+  goalCompletion GoalCompletion[]
 
   @@map("goals")
 }
 
 model GoalCompletion {
   id        String   @id @default(uuid())
-  goalId    String   @unique @map("goal_id")
+  goalId    String   @map("goal_id")
   createdAt DateTime @default(now()) @map("create_at")
 
   goal Goal @relation(fields: [goalId], references: [id])

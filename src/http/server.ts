@@ -1,9 +1,9 @@
 import fastify from 'fastify'
-import { createGoal } from './controllers/createGoal'
+import { routes } from './controllers/routes'
 
 const app = fastify()
 
-app.post('/goals', createGoal)
+app.register(routes)
 
 app
   .listen({

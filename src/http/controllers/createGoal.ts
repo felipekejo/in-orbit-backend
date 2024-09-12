@@ -10,7 +10,7 @@ export async function createGoal(request: FastifyRequest, reply: FastifyReply) {
   })
 
   const { title, desiredWeeklyFrequency } = createGoalBodySchema.parse(
-    request.body
+    request.body,
   )
 
   try {

@@ -32,10 +32,15 @@ async function seed() {
     },
   })
 
-  await prisma.goalCompletion.create({
-    data: {
-      goalId: goalCompletion.id,
-    },
+  await prisma.goalCompletion.createMany({
+    data: [
+      {
+        goalId: goalCompletion.id,
+      },
+      {
+        goalId: goalCompletion.id,
+      },
+    ],
   })
 }
 
